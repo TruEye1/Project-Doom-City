@@ -1,0 +1,4 @@
+repository "DoomCity/Doom City@4674173963534@cloud"
+  path "/"
+    br "/main"
+    co "/main"
