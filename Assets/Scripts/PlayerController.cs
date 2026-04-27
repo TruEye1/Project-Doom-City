@@ -1,97 +1,125 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using System.Collections;
 
 public class PlayerController : MonoBehaviour
 {
     [Header("Configuración de Movimiento")]
     public float speed = 5f;
+    public float runSpeed = 10f;
 
-    [Header("Configuración de Salto (Eje Z Falso)")]
-    public Transform spriteTransform; // Referencia al objeto hijo que contiene el Sprite y el Animator
+    [Header("Salto 2.5D")]
+    public Transform spriteTransform;
     public float jumpPower = 7f;
     public float gravity = 15f;
-
     private float currentJumpVelocity;
     private bool isJumping = false;
+    private bool isRunning = false;
+
+    [Header("Sistema de Combos")]
+    public int comboStep = 0;
+    public float comboWindow = 0.8f;
+    private float lastClickTime;
+    private bool isAttacking = false;
+
+    [Header("Referencias de Hitboxes")]
+    public GameObject hitboxAtk1;
+    public GameObject hitboxAtk2;
+    public GameObject hitboxAtk3;
+    public GameObject hitboxAtk4;
 
     private Rigidbody2D rb;
     private Animator anim;
-    private Vector2 movement;
-
     private PlayerControls controls;
+    private Vector2 moveInput;
 
     void Awake()
     {
-        // Inicializar el Action Map del New Input System
+        // Inicialización de Input System y suscripción de eventos
         controls = new PlayerControls();
 
-        // Suscribir el método RealizarSalto al evento "performed" del input Jump
         controls.Player.Jump.performed += ctx => RealizarSalto();
+        controls.Player.Run.performed += ctx => isRunning = true;
+        controls.Player.Run.canceled += ctx => isRunning = false;
+        controls.Player.Attack.performed += ctx => IntentarAtacar();
     }
 
-    void OnEnable()
-    {
-        controls.Enable();
-    }
-
-    void OnDisable()
-    {
-        controls.Disable();
-    }
+    void OnEnable() { controls.Enable(); }
+    void OnDisable() { controls.Disable(); }
 
     void Start()
     {
-        // El Rigidbody2D maneja las colisiones de la base (sombra)
         rb = GetComponent<Rigidbody2D>();
 
-        // El Animator se obtiene del objeto hijo para separar la lógica visual de la física
-        if (spriteTransform != null)
+        // Obtener referencias del objeto visual (hijo)
+        anim = GetComponentInChildren<Animator>();
+
+        // Auto-asignación de transform visual si no está definido en el Inspector
+        if (spriteTransform == null && anim != null)
         {
-            anim = spriteTransform.GetComponent<Animator>();
+            spriteTransform = anim.transform;
         }
     }
 
     void Update()
     {
-        // ¡El Guardia de Seguridad! 
-        // Si el tiempo está congelado (pausa), aborta y no leas el teclado.
         if (Time.timeScale == 0f) return;
 
-        // 1. Leer el vector de dirección desde el Input System
-        movement = controls.Player.Move.ReadValue<Vector2>();
+        // Reinicio del temporizador de combo (Input Buffer)
+        if (Time.time > lastClickTime + comboWindow && !isAttacking)
+        {
+            comboStep = 0;
+            if (anim != null) anim.SetInteger("ComboStep", 0);
+        }
 
-        // 2. Gestionar la orientación visual del sprite (Flip)
-        if (movement.x > 0)
+        // Control de movimiento y State Lock
+        if (isAttacking || isJumping)
+        {
+            moveInput = Vector2.zero;
+
+            // Forzar detención de animaciones de movimiento al atacar
+            if (anim != null)
+            {
+                anim.SetFloat("Speed", 0);
+                anim.SetBool("IsRunning", false);
+            }
+        }
+        else
+        {
+            moveInput = controls.Player.Move.ReadValue<Vector2>();
+        }
+
+        // Orientación del Sprite (Flip)
+        if (moveInput.x > 0)
         {
             spriteTransform.localScale = new Vector3(1, 1, 1);
         }
-        else if (movement.x < 0)
+        else if (moveInput.x < 0)
         {
             spriteTransform.localScale = new Vector3(-1, 1, 1);
         }
 
-        // 3. Sincronizar estados con el Animator
+        // Sincronización de variables del Animator
         if (anim != null)
         {
-            // Solo actualiza la animación de caminar si el personaje está en el suelo
-            if (!isJumping)
+            if (!isJumping && !isAttacking)
             {
-                anim.SetFloat("Speed", movement.sqrMagnitude);
+                anim.SetFloat("Speed", moveInput.sqrMagnitude);
+                anim.SetBool("IsRunning", isRunning && moveInput.sqrMagnitude > 0);
             }
             anim.SetBool("IsJumping", isJumping);
         }
 
-        // 4. Lógica de físicas para el salto en perspectiva 2.5D
-        // Se desplaza únicamente el Transform local del hijo en el eje Y para simular altura
+        // Simulación de gravedad en eje Z (falso 3D)
         if (isJumping)
         {
             currentJumpVelocity -= gravity * Time.deltaTime;
             spriteTransform.localPosition += new Vector3(0, currentJumpVelocity * Time.deltaTime, 0);
 
-            // Detectar aterrizaje cuando la posición local Y del sprite vuelve a la base (0)
+            // Detección de suelo
             if (spriteTransform.localPosition.y <= 0)
             {
-                spriteTransform.localPosition = Vector3.zero; // Forzar el anclaje exacto al suelo
+                spriteTransform.localPosition = Vector3.zero;
                 isJumping = false;
                 currentJumpVelocity = 0;
             }
@@ -100,17 +128,76 @@ public class PlayerController : MonoBehaviour
 
     void FixedUpdate()
     {
-        // Movimiento físico independiente de los frames para evitar jittering
-        rb.MovePosition(rb.position + movement.normalized * speed * Time.fixedDeltaTime);
+        // Bloqueo físico durante el estado de ataque
+        if (isAttacking) return;
+
+        float currentSpeed = isRunning ? runSpeed : speed;
+        rb.MovePosition(rb.position + moveInput.normalized * currentSpeed * Time.fixedDeltaTime);
     }
 
     private void RealizarSalto()
     {
-        // Método invocado por el Action Map para iniciar la parábola del salto
-        if (!isJumping)
+        if (!isJumping && !isAttacking)
         {
             isJumping = true;
             currentJumpVelocity = jumpPower;
         }
+    }
+
+    // --- LÓGICA DE COMBATE ---
+
+    private void IntentarAtacar()
+    {
+        // Validación de estado para iniciar secuencia de ataque
+        if (!isJumping && !isAttacking)
+        {
+            StartCoroutine(EjecutarAtaque());
+        }
+    }
+
+    private IEnumerator EjecutarAtaque()
+    {
+        isAttacking = true;
+        comboStep++;
+
+        // Ciclar el combo al superar el último golpe (Finisher)
+        if (comboStep > 4) comboStep = 1;
+
+        lastClickTime = Time.time;
+
+        if (anim != null)
+        {
+            anim.SetInteger("ComboStep", comboStep);
+            anim.SetTrigger("Attack");
+        }
+
+        // Definir duración del State Lock según el paso del combo
+        float pauseTime = (comboStep == 4) ? 0.6f : 0.35f;
+
+        yield return new WaitForSeconds(pauseTime);
+
+        // Fin de la secuencia de ataque, restaurar control
+        isAttacking = false;
+    }
+
+    // --- ANIMATION EVENTS ---
+
+    public void AbrirHitbox(int id)
+    {
+        // Limpiar estado de hitboxes para evitar colisiones superpuestas
+        CerrarHitboxes();
+
+        if (id == 1 && hitboxAtk1 != null) hitboxAtk1.SetActive(true);
+        if (id == 2 && hitboxAtk2 != null) hitboxAtk2.SetActive(true);
+        if (id == 3 && hitboxAtk3 != null) hitboxAtk3.SetActive(true);
+        if (id == 4 && hitboxAtk4 != null) hitboxAtk4.SetActive(true);
+    }
+
+    public void CerrarHitboxes()
+    {
+        if (hitboxAtk1 != null) hitboxAtk1.SetActive(false);
+        if (hitboxAtk2 != null) hitboxAtk2.SetActive(false);
+        if (hitboxAtk3 != null) hitboxAtk3.SetActive(false);
+        if (hitboxAtk4 != null) hitboxAtk4.SetActive(false);
     }
 }
