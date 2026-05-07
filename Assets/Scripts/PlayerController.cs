@@ -137,6 +137,9 @@ public class PlayerController : MonoBehaviour
 
     private void RealizarSalto()
     {
+        // Bloqueo de evento temporal: Ignorar el input si el juego está en pausa
+        if (Time.timeScale == 0f) return;
+
         if (!isJumping && !isAttacking)
         {
             isJumping = true;
@@ -148,6 +151,9 @@ public class PlayerController : MonoBehaviour
 
     private void IntentarAtacar()
     {
+        // Bloqueo de evento temporal: Ignorar el input si el juego está en pausa
+        if (Time.timeScale == 0f) return;
+
         // Validación de estado para iniciar secuencia de ataque
         if (!isJumping && !isAttacking)
         {
@@ -171,8 +177,9 @@ public class PlayerController : MonoBehaviour
             anim.SetTrigger("Attack");
         }
 
-        // Definir duración del State Lock según el paso del combo
-        float pauseTime = (comboStep == 4) ? 0.6f : 0.35f;
+        // Duración del State Lock ajustada para animaciones a velocidad 0.8x
+        // Valores originales (1.0x): 0.6f y 0.35f -> Nuevos (0.8x): 0.75f y 0.45f
+        float pauseTime = (comboStep == 4) ? 0.75f : 0.45f;
 
         yield return new WaitForSeconds(pauseTime);
 
