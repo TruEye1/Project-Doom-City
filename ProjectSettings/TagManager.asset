@@ -2,7 +2,7 @@
 %TAG !u! tag:unity3d.com,2011:
 --- !u!78 &1
 TagManager:
-  serializedVersion: 2
+  serializedVersion: 3
   tags: []
   layers:
   - Default
@@ -41,3 +41,18 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Fondo_Lejano
+    uniqueID: 3597416809
+    locked: 0
+  - name: Escenario_Base
+    uniqueID: 1041543109
+    locked: 0
+  - name: Personajes
+    uniqueID: 2304371501
+    locked: 0
+  - name: Frente_Decoracion
+    uniqueID: 3889996191
+    locked: 0
+  m_RenderingLayers:
+  - Default
+  m_MigratedRenderPipelines: []
