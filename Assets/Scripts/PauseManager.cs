@@ -1,10 +1,11 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public class PauseManager : MonoBehaviour
 {
     [Header("Interfaz de Pausa")]
-    public GameObject menuPausaUI; // Aquí conectaremos el Canvas
+    public GameObject menuPausaUI;
 
     private bool isPaused = false;
     private PlayerControls controls;
@@ -12,15 +13,12 @@ public class PauseManager : MonoBehaviour
     void Awake()
     {
         controls = new PlayerControls();
-
-        // Suscribimos la acción de pausa al botón Escape
         controls.Player.Pause.performed += ctx => AlternarPausa();
     }
 
     void OnEnable() { controls.Enable(); }
     void OnDisable() { controls.Disable(); }
 
-    // Función que decide si pausar o reanudar
     public void AlternarPausa()
     {
         if (isPaused) Reanudar();
@@ -29,21 +27,27 @@ public class PauseManager : MonoBehaviour
 
     public void Reanudar()
     {
-        menuPausaUI.SetActive(false); // Oculta el menú
-        Time.timeScale = 1f;          // El tiempo vuelve a la normalidad (100%)
+        menuPausaUI.SetActive(false);
+        Time.timeScale = 1f;
         isPaused = false;
     }
 
     void Pausar()
     {
-        menuPausaUI.SetActive(true);  // Muestra el menú
-        Time.timeScale = 0f;          // Congela el tiempo y las físicas (0%)
+        menuPausaUI.SetActive(true);
+        Time.timeScale = 0f;
         isPaused = true;
+    }
+
+    public void VolverAlMenuPrincipal()
+    {
+        Time.timeScale = 1f;
+        SceneManager.LoadScene("MenuInicio");
     }
 
     public void SalirDelJuego()
     {
         Debug.Log("Cerrando el juego...");
-        Application.Quit(); // Nota: Esto solo funciona al compilar el juego (.exe), no en el editor.
+        Application.Quit();
     }
 }
