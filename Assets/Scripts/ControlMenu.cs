@@ -8,7 +8,7 @@ public class ControlMenu : MonoBehaviour
 
     public void Jugar()
     {
-        SceneManager.LoadScene("SampleScene");
+        SceneManager.LoadScene("PantallaCarga");
     }
 
     public void Salir()
