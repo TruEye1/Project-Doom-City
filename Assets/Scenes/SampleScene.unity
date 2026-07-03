@@ -1414,7 +1414,7 @@ GameObject:
   - component: {fileID: 553701156}
   - component: {fileID: 553701161}
   - component: {fileID: 553701162}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Chris
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1479,7 +1479,7 @@ SpriteRenderer:
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
-  m_SpriteSortPoint: 0
+  m_SpriteSortPoint: 1
 --- !u!4 &553701157
 Transform:
   m_ObjectHideFlags: 0
@@ -1570,7 +1570,7 @@ MonoBehaviour:
   m_Intensity: 1
   m_LightVolumeIntensity: 1
   m_LightVolumeEnabled: 0
-  m_ApplyToSortingLayers: 0000000069396cd6c5af143e2deb59899fa1dce7
+  m_ApplyToSortingLayers: 0000000069396cd6c5af143e2deb59899fa1dce7bd799640
   m_LightCookieSprite: {fileID: 0}
   m_DeprecatedPointLightCookieSprite: {fileID: 0}
   m_LightOrder: 0
@@ -1718,7 +1718,7 @@ GameObject:
   m_Component:
   - component: {fileID: 889901299}
   - component: {fileID: 889901300}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Hitbox_Atk3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1919,6 +1919,38 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 913202972}
   m_CullTransparentMesh: 1
+--- !u!1 &981235529
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 981235530}
+  m_Layer: 0
+  m_Name: EnemigosBase
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &981235530
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 981235529}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 4.21257, y: 0.31034, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 8052039131628428855}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1172361761
 GameObject:
   m_ObjectHideFlags: 0
@@ -2020,7 +2052,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1197720368}
   - component: {fileID: 1197720369}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Hitbox_Atk4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2358,7 +2390,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1494323788}
   - component: {fileID: 1494323789}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Hitbox_Atk1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2593,7 +2625,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1607234636}
   - component: {fileID: 1607234637}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Hitbox_Atk2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3265,7 +3297,7 @@ GameObject:
   - component: {fileID: 1992251865}
   - component: {fileID: 1992251864}
   - component: {fileID: 1992251863}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: PlayerBase
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3384,6 +3416,76 @@ Transform:
   - {fileID: 553701157}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &8052039131628428855 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4713402363782368428, guid: a2623a44705ca3f4fbaf67b80cfd6562, type: 3}
+  m_PrefabInstance: {fileID: 8703026475546971677}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &8703026475546971677
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 981235530}
+    m_Modifications:
+    - target: {fileID: 4713402363782368428, guid: a2623a44705ca3f4fbaf67b80cfd6562, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -7.32
+      objectReference: {fileID: 0}
+    - target: {fileID: 4713402363782368428, guid: a2623a44705ca3f4fbaf67b80cfd6562, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -2.95
+      objectReference: {fileID: 0}
+    - target: {fileID: 4713402363782368428, guid: a2623a44705ca3f4fbaf67b80cfd6562, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4713402363782368428, guid: a2623a44705ca3f4fbaf67b80cfd6562, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4713402363782368428, guid: a2623a44705ca3f4fbaf67b80cfd6562, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4713402363782368428, guid: a2623a44705ca3f4fbaf67b80cfd6562, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4713402363782368428, guid: a2623a44705ca3f4fbaf67b80cfd6562, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4713402363782368428, guid: a2623a44705ca3f4fbaf67b80cfd6562, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4713402363782368428, guid: a2623a44705ca3f4fbaf67b80cfd6562, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4713402363782368428, guid: a2623a44705ca3f4fbaf67b80cfd6562, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6791337075091324819, guid: a2623a44705ca3f4fbaf67b80cfd6562, type: 3}
+      propertyPath: velocidadX
+      value: 2.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6791337075091324819, guid: a2623a44705ca3f4fbaf67b80cfd6562, type: 3}
+      propertyPath: distanciaAtaqueX
+      value: 2.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7027165715120518895, guid: a2623a44705ca3f4fbaf67b80cfd6562, type: 3}
+      propertyPath: m_Name
+      value: Enemigo_Pandillero_Verde
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: a2623a44705ca3f4fbaf67b80cfd6562, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -3403,3 +3505,4 @@ SceneRoots:
   - {fileID: 1172361763}
   - {fileID: 1621142477}
   - {fileID: 350099280}
+  - {fileID: 981235530}
