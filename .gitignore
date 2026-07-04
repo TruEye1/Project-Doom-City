@@ -1,24 +1,19 @@
-# Carpetas generadas automáticamente por Unity
 [Ll]ibrary/
 [Tt]emp/
 [Oo]bj/
 [Bb]uild/
 [Bb]uilds/
 [Ll]ogs/
-[Mm]emoryCaptures/
+[Uu]ser[Ss]ettings/
 
-# Archivos de Visual Studio / IDEs
 .vs/
-.gradle/
-ExportedObj/
-.consulo/
+.vscode/
+.idea/
+
 *.csproj
-*.unityproj
 *.sln
-*.suo
-*.tmp
 *.user
-*.userprefs
+*.unityproj
 *.pidb
 *.booproj
 *.svd
@@ -27,7 +22,5 @@ ExportedObj/
 *.opendb
 *.VC.db
 
-# Archivos del sistema operativo (Mac/Windows)
 .DS_Store
 Thumbs.db
-Desktop.ini

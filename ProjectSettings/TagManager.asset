@@ -11,9 +11,9 @@ TagManager:
   - 
   - Water
   - UI
-  - 
-  - 
-  - 
+  - Jugador
+  - Enemigo
+  - CapaAtaques
   - 
   - 
   - 
@@ -52,6 +52,9 @@ TagManager:
     locked: 0
   - name: Frente_Decoracion
     uniqueID: 3889996191
+    locked: 0
+  - name: UI
+    uniqueID: 1083603389
     locked: 0
   m_RenderingLayers:
   - Default
