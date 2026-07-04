@@ -1,28 +1,49 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class AtaqueEnemigo : MonoBehaviour
 {
-    [Tooltip("Cantidad de daño que hace este ataque")]
+    [Tooltip("Cantidad de dano que hace este ataque")]
     public int danoAtaque = 15;
+    [SerializeField] private AudioClip hitConfirmClip = null;
+    [SerializeField] private bool debugCombate = false;
+
+    private readonly HashSet<SaludJugador> jugadoresGolpeados = new HashSet<SaludJugador>();
+
+    private void OnEnable()
+    {
+        jugadoresGolpeados.Clear();
+    }
+
+    private void OnDisable()
+    {
+        jugadoresGolpeados.Clear();
+    }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        // EL RADAR: Esto imprimirá en consola el nombre y el Tag de CUALQUIER cosa que toque
-        Debug.Log($"[RADAR] El puño tocó a: {collision.gameObject.name} | Su Tag es: {collision.tag}");
-
-        if (collision.CompareTag("Player"))
+        SaludJugador jugador = collision.GetComponentInParent<SaludJugador>();
+        if (jugador == null || jugador.EstaMuerto)
         {
-            SaludJugador jugador = collision.GetComponent<SaludJugador>();
+            return;
+        }
 
-            if (jugador != null)
-            {
-                jugador.RecibirDano(danoAtaque);
-                // gameObject.SetActive(false); // Lo dejamos comentado por ahora para pruebas
-            }
-            else
-            {
-                Debug.LogWarning("⚠️ ERROR: Golpeé a Chris, pero no encuentro el script 'SaludJugador' en él.");
-            }
+        if (!jugadoresGolpeados.Add(jugador))
+        {
+            return;
+        }
+
+        bool golpeAplicado = jugador.RecibirDano(danoAtaque);
+        if (!golpeAplicado)
+        {
+            return;
+        }
+
+        CombatAudioPlayer.PlayEnemyHit(jugador.transform.position, hitConfirmClip);
+
+        if (debugCombate)
+        {
+            Debug.Log($"Golpe enemigo -> {jugador.name} por {danoAtaque}");
         }
     }
 }

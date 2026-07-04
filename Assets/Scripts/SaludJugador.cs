@@ -1,57 +1,176 @@
+using System;
+using System.Collections;
 using UnityEngine;
 
 public class SaludJugador : MonoBehaviour
 {
     public int vidaMaxima = 100;
+    [SerializeField] private float duracionInvulnerabilidad = 0.4f;
+    [SerializeField] private float duracionStunAlRecibirDano = 0.5f;
+    [SerializeField] private float retrasoMenuDerrota = 1.6f;
+
+    public int VidaActual => vidaActual;
+    public int VidaMaxima => vidaMaxima;
+    public float PorcentajeVida => vidaMaxima <= 0 ? 0f : (float)vidaActual / vidaMaxima;
+    public bool EstaMuerto { get; private set; }
+
+    public event Action<int, int> OnVidaCambiada;
+    public event Action OnMuerto;
+
+    private static readonly int HashTakeDamage1 = Animator.StringToHash("TakeDamage1");
+    private static readonly int HashTakeDamage2 = Animator.StringToHash("TakeDamage2");
+    private static readonly int StateDeath = Animator.StringToHash("Chris_Death");
+
     private int vidaActual;
-
-    private bool estaMuerto = false;
+    private float invulnerableHasta;
     private Animator anim;
+    private PlayerController playerController;
+    private Coroutine gameOverCoroutine;
+    private bool gameOverMostrado;
 
-    void Start()
+    private void Awake()
     {
-        vidaActual = vidaMaxima;
-        // Busca el Animator en el objeto actual o en sus hijos
+        vidaActual = Mathf.Max(1, vidaMaxima);
         anim = GetComponentInChildren<Animator>();
+        playerController = GetComponent<PlayerController>();
     }
 
-    public void RecibirDano(int cantidadDano)
+    private void Start()
     {
-        if (estaMuerto) return;
+        EmitirVidaCambiada();
+    }
 
-        vidaActual -= cantidadDano;
-
-        // --- LÓGICA DE ANIMACIÓN ALEATORIA ---
-        if (anim != null)
+    private void OnDisable()
+    {
+        if (gameOverCoroutine != null)
         {
-            // Random.Range(1, 3) devuelve un 1 o un 2
-            int tipoDano = Random.Range(1, 3);
+            StopCoroutine(gameOverCoroutine);
+            gameOverCoroutine = null;
+        }
+    }
 
-            if (tipoDano == 1)
-            {
-                anim.SetTrigger("TakeDamage1");
-            }
-            else
-            {
-                anim.SetTrigger("TakeDamage2");
-            }
+    public bool RecibirDano(int cantidadDano)
+    {
+        if (EstaMuerto || Time.time < invulnerableHasta)
+        {
+            return false;
         }
 
-        Debug.Log($"¡Chris recibió {cantidadDano} de daño! Vida restante: {vidaActual}");
+        int danoAplicado = Mathf.Max(0, cantidadDano);
+        if (danoAplicado <= 0)
+        {
+            return false;
+        }
+
+        invulnerableHasta = Time.time + duracionInvulnerabilidad;
+        vidaActual = Mathf.Clamp(vidaActual - danoAplicado, 0, vidaMaxima);
+        EmitirVidaCambiada();
 
         if (vidaActual <= 0)
         {
             Morir();
+            return true;
         }
+
+        ReproducirDano();
+
+        playerController = playerController != null ? playerController : GetComponent<PlayerController>();
+        if (playerController != null)
+        {
+            playerController.EntrarStun(duracionStunAlRecibirDano);
+        }
+
+        return true;
+    }
+
+    public bool Curar(int cantidad)
+    {
+        if (EstaMuerto || cantidad <= 0 || vidaActual >= vidaMaxima)
+        {
+            return false;
+        }
+
+        int vidaAnterior = vidaActual;
+        vidaActual = Mathf.Clamp(vidaActual + cantidad, 0, vidaMaxima);
+
+        if (vidaActual == vidaAnterior)
+        {
+            return false;
+        }
+
+        EmitirVidaCambiada();
+        return true;
+    }
+
+    private void ReproducirDano()
+    {
+        if (anim == null)
+        {
+            return;
+        }
+
+        anim.SetTrigger(UnityEngine.Random.Range(0, 2) == 0 ? HashTakeDamage1 : HashTakeDamage2);
     }
 
     private void Morir()
     {
-        estaMuerto = true;
+        if (EstaMuerto)
+        {
+            return;
+        }
 
-        // Si tienes animación de muerte para Chris, puedes activarla aquí
-        // anim.SetBool("isDead", true);
+        EstaMuerto = true;
+        playerController = playerController != null ? playerController : GetComponent<PlayerController>();
+        if (playerController != null)
+        {
+            playerController.Morir();
+        }
+        else if (anim != null)
+        {
+            anim.ResetTrigger(HashTakeDamage1);
+            anim.ResetTrigger(HashTakeDamage2);
+            anim.Play(StateDeath, 0, 0f);
+        }
 
-        Debug.Log("¡Chris ha caído! Game Over.");
+        OnMuerto?.Invoke();
+
+        if (gameOverCoroutine != null)
+        {
+            StopCoroutine(gameOverCoroutine);
+        }
+
+        gameOverCoroutine = StartCoroutine(MostrarGameOverTrasDelay());
+    }
+
+    public void FinalizarMuerteJugador()
+    {
+        if (!EstaMuerto)
+        {
+            return;
+        }
+    }
+
+    public void MostrarGameOver()
+    {
+        if (!EstaMuerto || gameOverMostrado)
+        {
+            return;
+        }
+
+        gameOverMostrado = true;
+        PauseManager pauseManager = FindFirstObjectByType<PauseManager>();
+        GameOverMenuView.Show(pauseManager);
+    }
+
+    private IEnumerator MostrarGameOverTrasDelay()
+    {
+        yield return new WaitForSeconds(Mathf.Max(0f, retrasoMenuDerrota));
+        gameOverCoroutine = null;
+        MostrarGameOver();
+    }
+
+    private void EmitirVidaCambiada()
+    {
+        OnVidaCambiada?.Invoke(vidaActual, vidaMaxima);
     }
 }

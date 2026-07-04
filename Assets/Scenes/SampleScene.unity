@@ -170,7 +170,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 28.911749, y: 3.232696}
+  m_Offset: {x: 28.804337, y: 3.232696}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -180,7 +180,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 0.17477036, y: 8.278619}
+  m_Size: {x: 0.21773529, y: 8.278619}
   m_EdgeRadius: 0
 --- !u!4 &221916339
 Transform:
@@ -1801,6 +1801,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::AtaqueJugador
   danoAtaque: 10
   esGolpeFinal: 1
+  debugCombate: 0
 --- !u!1 &913202972
 GameObject:
   m_ObjectHideFlags: 0
@@ -2150,6 +2151,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::AtaqueJugador
   danoAtaque: 20
   esGolpeFinal: 0
+  debugCombate: 0
 --- !u!1 &1381958839
 GameObject:
   m_ObjectHideFlags: 0
@@ -2503,6 +2505,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::AtaqueJugador
   danoAtaque: 10
   esGolpeFinal: 0
+  debugCombate: 0
 --- !u!1 &1526662682
 GameObject:
   m_ObjectHideFlags: 0
@@ -2753,6 +2756,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::AtaqueJugador
   danoAtaque: 10
   esGolpeFinal: 0
+  debugCombate: 0
 --- !u!1 &1621142475
 GameObject:
   m_ObjectHideFlags: 0
@@ -3458,6 +3462,7 @@ MonoBehaviour:
   gravity: 15
   comboStep: 0
   comboWindow: 0.8
+  attackFallbackSeconds: 0.9
   hitboxAtk1: {fileID: 1494323787}
   hitboxAtk2: {fileID: 1607234635}
   hitboxAtk3: {fileID: 889901298}
@@ -3537,6 +3542,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SaludJugador
   vidaMaxima: 100
+  duracionInvulnerabilidad: 0.4
 --- !u!4 &8052039131628428855 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4713402363782368428, guid: a2623a44705ca3f4fbaf67b80cfd6562, type: 3}

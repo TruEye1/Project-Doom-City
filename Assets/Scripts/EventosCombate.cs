@@ -3,21 +3,59 @@ using UnityEngine;
 public class EventosCombate : MonoBehaviour
 {
     private PlayerController player;
+    private SaludJugador saludJugador;
 
-    void Start()
+    private void Awake()
     {
-        // Al iniciar, busca a su "padre" (PlayerBase) y se conecta a su cerebro
         player = GetComponentInParent<PlayerController>();
+        saludJugador = GetComponentInParent<SaludJugador>();
     }
 
-    // Estas son las funciones que la ventana Animation AHORA SÍ verá
     public void AbrirHitbox(int id)
     {
-        if (player != null) player.AbrirHitbox(id);
+        if (player != null)
+        {
+            player.AbrirHitbox(id);
+        }
     }
 
     public void CerrarHitboxes()
     {
-        if (player != null) player.CerrarHitboxes();
+        if (player != null)
+        {
+            player.CerrarHitboxes();
+        }
+    }
+
+    public void FinAtaque()
+    {
+        if (player != null)
+        {
+            player.FinAtaque();
+        }
+    }
+
+    public void FinStunJugador()
+    {
+        if (player != null)
+        {
+            player.FinStunJugador();
+        }
+    }
+
+    public void FinalizarMuerteJugador()
+    {
+        if (saludJugador != null)
+        {
+            saludJugador.FinalizarMuerteJugador();
+        }
+    }
+
+    public void MostrarGameOver()
+    {
+        if (saludJugador != null)
+        {
+            saludJugador.MostrarGameOver();
+        }
     }
 }

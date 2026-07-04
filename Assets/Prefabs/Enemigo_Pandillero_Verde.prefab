@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3985138718566582859}
   - component: {fileID: 8390783050156263487}
   - component: {fileID: 1482694318295369003}
-  m_Layer: 7
+  m_Layer: 8
   m_Name: Hitbox_Ataque
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -219,7 +219,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7027165715120518895}
-  m_BodyType: 0
+  m_BodyType: 1
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0

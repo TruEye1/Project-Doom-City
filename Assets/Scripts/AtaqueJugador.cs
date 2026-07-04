@@ -1,29 +1,49 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class AtaqueJugador : MonoBehaviour
 {
     public int danoAtaque = 10;
     public bool esGolpeFinal = false;
-    private bool yaGolpeoEnEsteSwing = false; // Control de seguridad
+    [SerializeField] private AudioClip hitConfirmClip = null;
+    [SerializeField] private bool debugCombate = false;
+
+    private readonly HashSet<EnemigoIA> enemigosGolpeados = new HashSet<EnemigoIA>();
 
     private void OnEnable()
     {
-        yaGolpeoEnEsteSwing = false; // Reseteamos al activar el hitbox
+        enemigosGolpeados.Clear();
+    }
+
+    private void OnDisable()
+    {
+        enemigosGolpeados.Clear();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        // 1. Evitar golpear múltiples veces
-        if (yaGolpeoEnEsteSwing) return;
-
-        // 2. Solo detectar el enemigo, ignorar sus propios hitboxes
-        EnemigoIA enemigo = collision.GetComponent<EnemigoIA>();
-
-        if (enemigo != null)
+        EnemigoIA enemigo = collision.GetComponentInParent<EnemigoIA>();
+        if (enemigo == null || !enemigo.PuedeRecibirDano)
         {
-            yaGolpeoEnEsteSwing = true; // Marcamos que ya golpeamos
-            enemigo.RecibirDano(danoAtaque, esGolpeFinal);
-            Debug.Log($"¡Golpe limpio a {collision.gameObject.name}!");
+            return;
+        }
+
+        if (!enemigosGolpeados.Add(enemigo))
+        {
+            return;
+        }
+
+        bool golpeAplicado = enemigo.RecibirDano(danoAtaque, esGolpeFinal, new Vector2(transform.position.x, transform.position.y));
+        if (!golpeAplicado)
+        {
+            return;
+        }
+
+        CombatAudioPlayer.PlayPlayerHit(enemigo.transform.position, hitConfirmClip);
+
+        if (debugCombate)
+        {
+            Debug.Log($"Golpe jugador -> {enemigo.name} por {danoAtaque}");
         }
     }
 }
