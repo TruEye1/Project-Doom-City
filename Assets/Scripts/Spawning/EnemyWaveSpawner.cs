@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -57,7 +58,13 @@ public class EnemyWaveSpawner : MonoBehaviour
 
     private GameHUD hud;
     private bool initialized;
+    private int enemigosVivos;
+    private readonly Dictionary<EnemigoIA, Action> deathHandlers = new Dictionary<EnemigoIA, Action>();
     private static bool sceneHookRegistered;
+
+    public int EnemigosVivos => enemigosVivos;
+    public bool TodasOleadasGeneradas => TodasLasOleadasFueronGeneradas();
+    public bool TodasOleadasCompletadas => initialized && TodasOleadasGeneradas && enemigosVivos <= 0;
 
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
     private static void RegisterSceneHook()
@@ -110,6 +117,11 @@ public class EnemyWaveSpawner : MonoBehaviour
         ResolverReferencias();
         PrepararTemplate();
         initialized = enemyTemplate != null && jugador != null;
+    }
+
+    private void OnDisable()
+    {
+        LimpiarEventosMuerte();
     }
 
     private void Update()
@@ -223,6 +235,7 @@ public class EnemyWaveSpawner : MonoBehaviour
             EnemigoIA enemigo = clone.GetComponent<EnemigoIA>();
             if (enemigo != null)
             {
+                RegistrarEnemigoVivo(enemigo);
                 RegistrarEnHUD(enemigo);
             }
         }
@@ -248,6 +261,9 @@ public class EnemyWaveSpawner : MonoBehaviour
 
     private void ReiniciarOleadas()
     {
+        enemigosVivos = 0;
+        LimpiarEventosMuerte();
+
         if (waves == null)
         {
             return;
@@ -260,5 +276,61 @@ public class EnemyWaveSpawner : MonoBehaviour
                 waves[i].spawned = false;
             }
         }
+    }
+
+    private void RegistrarEnemigoVivo(EnemigoIA enemigo)
+    {
+        if (enemigo == null || deathHandlers.ContainsKey(enemigo))
+        {
+            return;
+        }
+
+        enemigosVivos++;
+        Action handler = () => RegistrarMuerteEnemigo(enemigo);
+        deathHandlers.Add(enemigo, handler);
+        enemigo.OnMuerto += handler;
+    }
+
+    private void RegistrarMuerteEnemigo(EnemigoIA enemigo)
+    {
+        if (enemigo == null || !deathHandlers.TryGetValue(enemigo, out Action handler))
+        {
+            return;
+        }
+
+        enemigo.OnMuerto -= handler;
+        deathHandlers.Remove(enemigo);
+        enemigosVivos = Mathf.Max(0, enemigosVivos - 1);
+    }
+
+    private void LimpiarEventosMuerte()
+    {
+        foreach (KeyValuePair<EnemigoIA, Action> pair in deathHandlers)
+        {
+            if (pair.Key != null)
+            {
+                pair.Key.OnMuerto -= pair.Value;
+            }
+        }
+
+        deathHandlers.Clear();
+    }
+
+    private bool TodasLasOleadasFueronGeneradas()
+    {
+        if (waves == null || waves.Length == 0)
+        {
+            return true;
+        }
+
+        for (int i = 0; i < waves.Length; i++)
+        {
+            if (waves[i] != null && !waves[i].spawned)
+            {
+                return false;
+            }
+        }
+
+        return true;
     }
 }

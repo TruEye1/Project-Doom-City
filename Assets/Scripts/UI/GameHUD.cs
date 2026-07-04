@@ -196,7 +196,7 @@ public class GameHUD : MonoBehaviour
         }
 
         scaler.uiScaleMode = CanvasScaler.ScaleMode.ScaleWithScreenSize;
-        scaler.referenceResolution = new Vector2(960f, 540f);
+        scaler.referenceResolution = new Vector2(960f, 720f);
         scaler.matchWidthOrHeight = 0.5f;
 
         if (GetComponent<GraphicRaycaster>() == null)

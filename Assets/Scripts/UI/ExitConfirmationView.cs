@@ -4,31 +4,34 @@ using UnityEngine.EventSystems;
 using UnityEngine.InputSystem.UI;
 using UnityEngine.UI;
 
-public class RetroPauseMenuView : MonoBehaviour
+public class ExitConfirmationView : MonoBehaviour
 {
-    public static Canvas CreatePauseCanvas()
+    private static ExitConfirmationView instance;
+
+    public static void Show()
     {
-        GameObject canvasObject = new GameObject("MenuPausa_Canvas", typeof(RectTransform), typeof(Canvas), typeof(CanvasScaler), typeof(GraphicRaycaster));
-        Canvas canvas = canvasObject.GetComponent<Canvas>();
-        canvas.renderMode = RenderMode.ScreenSpaceOverlay;
-        canvas.sortingOrder = 50;
+        if (instance == null)
+        {
+            instance = FindAnyObjectByType<ExitConfirmationView>();
+        }
 
-        CanvasScaler scaler = canvasObject.GetComponent<CanvasScaler>();
-        scaler.uiScaleMode = CanvasScaler.ScaleMode.ScaleWithScreenSize;
-        scaler.referenceResolution = new Vector2(960f, 720f);
-        scaler.matchWidthOrHeight = 0.5f;
+        if (instance == null)
+        {
+            GameObject canvasObject = new GameObject("ExitConfirmation_Canvas", typeof(RectTransform), typeof(Canvas), typeof(CanvasScaler), typeof(GraphicRaycaster), typeof(ExitConfirmationView));
+            instance = canvasObject.GetComponent<ExitConfirmationView>();
+        }
 
-        EnsureEventSystem();
-        return canvas;
+        instance.Build();
+        instance.gameObject.SetActive(true);
     }
 
-    public void Build(PauseManager pauseManager)
+    private void Build()
     {
         EnsureEventSystem();
         PrepararCanvas();
         LimpiarHijos();
 
-        GameObject overlay = CrearUI("RetroPauseMenu_Root", transform, typeof(Image));
+        GameObject overlay = CrearUI("ExitConfirmation_Root", transform, typeof(Image));
         RectTransform overlayRect = overlay.GetComponent<RectTransform>();
         overlayRect.anchorMin = Vector2.zero;
         overlayRect.anchorMax = Vector2.one;
@@ -42,7 +45,7 @@ public class RetroPauseMenuView : MonoBehaviour
         panelRect.anchorMax = new Vector2(0.5f, 0.5f);
         panelRect.pivot = new Vector2(0.5f, 0.5f);
         panelRect.anchoredPosition = Vector2.zero;
-        panelRect.sizeDelta = new Vector2(360f, 300f);
+        panelRect.sizeDelta = new Vector2(430f, 230f);
         panel.GetComponent<Image>().color = new Color32(232, 220, 146, 255);
 
         GameObject inner = CrearUI("Inner", panel.transform, typeof(Image));
@@ -53,44 +56,49 @@ public class RetroPauseMenuView : MonoBehaviour
         innerRect.offsetMax = new Vector2(-8f, -8f);
         inner.GetComponent<Image>().color = new Color32(18, 20, 34, 255);
 
-        TMP_Text title = CrearTexto("Titulo", inner.transform, "PAUSA", 46f, TextAlignmentOptions.Center, new Color32(255, 238, 120, 255));
+        TMP_Text title = CrearTexto("Titulo", inner.transform, "SALIR", 38f, TextAlignmentOptions.Center, new Color32(255, 238, 120, 255));
         RectTransform titleRect = title.GetComponent<RectTransform>();
         titleRect.anchorMin = new Vector2(0f, 1f);
         titleRect.anchorMax = new Vector2(1f, 1f);
         titleRect.pivot = new Vector2(0.5f, 1f);
         titleRect.anchoredPosition = new Vector2(0f, -24f);
-        titleRect.sizeDelta = new Vector2(0f, 60f);
+        titleRect.sizeDelta = new Vector2(0f, 48f);
 
-        CrearBoton(inner.transform, "CONTINUAR", new Vector2(0f, 28f), pauseManager.Reanudar);
-        CrearBoton(inner.transform, "REINICIAR NIVEL", new Vector2(0f, -40f), pauseManager.ReiniciarNivel);
-        CrearBoton(inner.transform, "SALIR AL MENU", new Vector2(0f, -108f), pauseManager.VolverAlMenuPrincipal);
+        TMP_Text message = CrearTexto("Mensaje", inner.transform, "¿Deseas salir al escritorio?", 22f, TextAlignmentOptions.Center, new Color32(255, 245, 210, 255));
+        RectTransform messageRect = message.GetComponent<RectTransform>();
+        messageRect.anchorMin = new Vector2(0f, 1f);
+        messageRect.anchorMax = new Vector2(1f, 1f);
+        messageRect.pivot = new Vector2(0.5f, 1f);
+        messageRect.anchoredPosition = new Vector2(0f, -82f);
+        messageRect.sizeDelta = new Vector2(0f, 40f);
+
+        CrearBoton(inner.transform, "SÍ", new Vector2(-92f, -64f), ConfirmarSalida);
+        CrearBoton(inner.transform, "NO", new Vector2(92f, -64f), Cancelar);
     }
 
     private void PrepararCanvas()
     {
         Canvas canvas = GetComponent<Canvas>();
-        if (canvas == null)
-        {
-            canvas = gameObject.AddComponent<Canvas>();
-        }
-
         canvas.renderMode = RenderMode.ScreenSpaceOverlay;
-        canvas.sortingOrder = 50;
+        canvas.sortingOrder = 80;
 
         CanvasScaler scaler = GetComponent<CanvasScaler>();
-        if (scaler == null)
-        {
-            scaler = gameObject.AddComponent<CanvasScaler>();
-        }
-
         scaler.uiScaleMode = CanvasScaler.ScaleMode.ScaleWithScreenSize;
         scaler.referenceResolution = new Vector2(960f, 720f);
         scaler.matchWidthOrHeight = 0.5f;
+    }
 
-        if (GetComponent<GraphicRaycaster>() == null)
-        {
-            gameObject.AddComponent<GraphicRaycaster>();
-        }
+    private void ConfirmarSalida()
+    {
+#if UNITY_EDITOR
+        Debug.Log("Salida al escritorio solicitada. En build standalone se cerrara la aplicacion.");
+#endif
+        Application.Quit();
+    }
+
+    private void Cancelar()
+    {
+        gameObject.SetActive(false);
     }
 
     private void LimpiarHijos()
@@ -103,7 +111,7 @@ public class RetroPauseMenuView : MonoBehaviour
 
     private static void EnsureEventSystem()
     {
-        if (FindFirstObjectByType<EventSystem>() != null)
+        if (FindAnyObjectByType<EventSystem>() != null)
         {
             return;
         }
@@ -115,9 +123,9 @@ public class RetroPauseMenuView : MonoBehaviour
     private GameObject CrearUI(string objectName, Transform parent, params System.Type[] components)
     {
         GameObject go = new GameObject(objectName, typeof(RectTransform));
-        foreach (System.Type component in components)
+        for (int i = 0; i < components.Length; i++)
         {
-            go.AddComponent(component);
+            go.AddComponent(components[i]);
         }
 
         go.transform.SetParent(parent, false);
@@ -132,19 +140,19 @@ public class RetroPauseMenuView : MonoBehaviour
         tmp.fontSize = fontSize;
         tmp.alignment = alignment;
         tmp.color = color;
-        tmp.enableWordWrapping = false;
+        tmp.textWrappingMode = TextWrappingModes.NoWrap;
         return tmp;
     }
 
     private void CrearBoton(Transform parent, string text, Vector2 anchoredPosition, UnityEngine.Events.UnityAction onClick)
     {
-        GameObject buttonObject = CrearUI($"Boton_{text.Replace(" ", "_")}", parent, typeof(Image), typeof(Button));
+        GameObject buttonObject = CrearUI($"Boton_{text}", parent, typeof(Image), typeof(Button));
         RectTransform rect = buttonObject.GetComponent<RectTransform>();
         rect.anchorMin = new Vector2(0.5f, 0.5f);
         rect.anchorMax = new Vector2(0.5f, 0.5f);
         rect.pivot = new Vector2(0.5f, 0.5f);
         rect.anchoredPosition = anchoredPosition;
-        rect.sizeDelta = new Vector2(260f, 46f);
+        rect.sizeDelta = new Vector2(140f, 44f);
 
         Image image = buttonObject.GetComponent<Image>();
         image.color = new Color32(64, 78, 142, 255);

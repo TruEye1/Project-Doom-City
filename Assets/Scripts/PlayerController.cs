@@ -167,7 +167,8 @@ public class PlayerController : MonoBehaviour
         }
 
         float currentSpeed = isRunning ? runSpeed : speed;
-        rb.MovePosition(rb.position + moveInput.normalized * currentSpeed * Time.fixedDeltaTime);
+        Vector2 targetPosition = rb.position + moveInput.normalized * currentSpeed * Time.fixedDeltaTime;
+        rb.MovePosition(StageBounds2D.ClampRigidbodyTarget(rb, targetPosition));
     }
 
     private void RealizarSalto()

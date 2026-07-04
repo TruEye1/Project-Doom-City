@@ -14,6 +14,7 @@ public class PauseManager : MonoBehaviour
     private void Awake()
     {
         GameOverMenuView.ResetRuntimeState();
+        AlphaCompletionView.ResetRuntimeState();
         controls = new PlayerControls();
         controls.Player.Pause.performed += _ => TogglePausa();
 
@@ -51,7 +52,7 @@ public class PauseManager : MonoBehaviour
 
     public void TogglePausa()
     {
-        if (GameOverMenuView.GameOverActivo)
+        if (GameOverMenuView.GameOverActivo || AlphaCompletionView.Activo)
         {
             return;
         }
@@ -68,7 +69,7 @@ public class PauseManager : MonoBehaviour
 
     public void Pausar()
     {
-        if (GameOverMenuView.GameOverActivo)
+        if (GameOverMenuView.GameOverActivo || AlphaCompletionView.Activo)
         {
             return;
         }
@@ -96,6 +97,7 @@ public class PauseManager : MonoBehaviour
     public void ReiniciarNivel()
     {
         GameOverMenuView.ResetRuntimeState();
+        AlphaCompletionView.ResetRuntimeState();
         Time.timeScale = 1f;
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
@@ -103,6 +105,7 @@ public class PauseManager : MonoBehaviour
     public void VolverAlMenuPrincipal()
     {
         GameOverMenuView.ResetRuntimeState();
+        AlphaCompletionView.ResetRuntimeState();
         Time.timeScale = 1f;
         SceneManager.LoadScene("MenuInicio");
     }

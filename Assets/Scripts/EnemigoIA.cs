@@ -166,7 +166,7 @@ public class EnemigoIA : MonoBehaviour
             Mathf.MoveTowards(rb.position.x, destinoX, velocidadX * Time.fixedDeltaTime),
             Mathf.MoveTowards(rb.position.y, targetY, velocidadY * Time.fixedDeltaTime)
         );
-        rb.MovePosition(nuevaPos);
+        rb.MovePosition(StageBounds2D.ClampRigidbodyTarget(rb, nuevaPos));
     }
 
     private void BuscarJugador()
@@ -640,7 +640,7 @@ public class EnemigoIA : MonoBehaviour
     {
         float duracion = Mathf.Max(0.02f, knockbackDuration);
         Vector2 inicio = rb.position;
-        Vector2 destino = new Vector2(inicio.x + direccion * knockbackDistance, inicio.y);
+        Vector2 destino = StageBounds2D.ClampRigidbodyTarget(rb, new Vector2(inicio.x + direccion * knockbackDistance, inicio.y));
         float tiempo = 0f;
 
         while (tiempo < duracion && state == EnemyState.Knockdown)
@@ -649,13 +649,13 @@ public class EnemigoIA : MonoBehaviour
             float t = Mathf.Clamp01(tiempo / duracion);
             float suavizado = 1f - (1f - t) * (1f - t);
             float x = inicio.x + (destino.x - inicio.x) * suavizado;
-            rb.MovePosition(new Vector2(x, inicio.y));
+            rb.MovePosition(StageBounds2D.ClampRigidbodyTarget(rb, new Vector2(x, inicio.y)));
             yield return null;
         }
 
         if (state == EnemyState.Knockdown)
         {
-            rb.MovePosition(destino);
+            rb.MovePosition(StageBounds2D.ClampRigidbodyTarget(rb, destino));
         }
 
         knockbackCoroutine = null;

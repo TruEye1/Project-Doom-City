@@ -33,7 +33,7 @@ public class ControlMenu : MonoBehaviour
 
     public void Salir()
     {
-        Application.Quit();
+        ExitConfirmationView.Show();
     }
 
     public void AbrirConfiguracion()
@@ -112,7 +112,7 @@ public class ControlMenu : MonoBehaviour
             return;
         }
 
-        button.onClick.RemoveAllListeners();
+        button.onClick = new Button.ButtonClickedEvent();
         button.onClick.AddListener(action);
     }
 
