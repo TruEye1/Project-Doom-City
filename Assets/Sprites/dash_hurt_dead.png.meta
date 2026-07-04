@@ -1,0 +1,652 @@
+fileFormatVersion: 2
+guid: e7a89c10ed0e27f4e83caba7e05185be
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 6645264266374813467
+    second: dash_hurt_dead_0
+  - first:
+      213: 2654594835952772264
+    second: dash_hurt_dead_1
+  - first:
+      213: 8780565004892237556
+    second: dash_hurt_dead_2
+  - first:
+      213: 8853499207170629639
+    second: dash_hurt_dead_3
+  - first:
+      213: -3142530043998755695
+    second: dash_hurt_dead_4
+  - first:
+      213: -8312960404639621606
+    second: dash_hurt_dead_5
+  - first:
+      213: -5066451165110072918
+    second: dash_hurt_dead_6
+  - first:
+      213: -6690292244543638830
+    second: dash_hurt_dead_7
+  - first:
+      213: -5543554336468572876
+    second: dash_hurt_dead_8
+  - first:
+      213: -6907536018172025644
+    second: dash_hurt_dead_9
+  - first:
+      213: 3355421319856778601
+    second: dash_hurt_dead_10
+  - first:
+      213: -8650231782333417944
+    second: dash_hurt_dead_11
+  - first:
+      213: 8524004305091298421
+    second: dash_hurt_dead_12
+  - first:
+      213: 909135216066950686
+    second: dash_hurt_dead_13
+  - first:
+      213: -5742649993691852982
+    second: dash_hurt_dead_14
+  - first:
+      213: -3699525806380731286
+    second: dash_hurt_dead_15
+  - first:
+      213: 4072710842876172107
+    second: dash_hurt_dead_16
+  - first:
+      213: 6926080161925073382
+    second: dash_hurt_dead_17
+  - first:
+      213: -4884895691458072833
+    second: dash_hurt_dead_18
+  - first:
+      213: -7926769803808057597
+    second: dash_hurt_dead_19
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 32
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 4096
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: dash_hurt_dead_0
+      rect:
+        serializedVersion: 2
+        x: 22
+        y: 1154
+        width: 72
+        height: 105
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b171ed364a8b83c50800000000000000
+      internalID: 6645264266374813467
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dash_hurt_dead_1
+      rect:
+        serializedVersion: 2
+        x: 134
+        y: 1154
+        width: 93
+        height: 101
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8a42d8b40f307d420800000000000000
+      internalID: 2654594835952772264
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dash_hurt_dead_2
+      rect:
+        serializedVersion: 2
+        x: 266
+        y: 1154
+        width: 95
+        height: 97
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4fee3dbb955dad970800000000000000
+      internalID: 8780565004892237556
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dash_hurt_dead_3
+      rect:
+        serializedVersion: 2
+        x: 475
+        y: 1154
+        width: 53
+        height: 95
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 700ab9efe92fdda70800000000000000
+      internalID: 8853499207170629639
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dash_hurt_dead_4
+      rect:
+        serializedVersion: 2
+        x: 574
+        y: 1154
+        width: 63
+        height: 90
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1942677239d7364d0800000000000000
+      internalID: -3142530043998755695
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dash_hurt_dead_5
+      rect:
+        serializedVersion: 2
+        x: 681
+        y: 1154
+        width: 69
+        height: 90
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a1e51915e8e62ac80800000000000000
+      internalID: -8312960404639621606
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dash_hurt_dead_6
+      rect:
+        serializedVersion: 2
+        x: 794
+        y: 1154
+        width: 66
+        height: 90
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: aa900cf228950b9b0800000000000000
+      internalID: -5066451165110072918
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dash_hurt_dead_7
+      rect:
+        serializedVersion: 2
+        x: 36
+        y: 1023
+        width: 85
+        height: 79
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2d2fc6876ae4723a0800000000000000
+      internalID: -6690292244543638830
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dash_hurt_dead_8
+      rect:
+        serializedVersion: 2
+        x: 161
+        y: 1023
+        width: 91
+        height: 79
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 435e6b5b3b65113b0800000000000000
+      internalID: -5543554336468572876
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dash_hurt_dead_9
+      rect:
+        serializedVersion: 2
+        x: 294
+        y: 1023
+        width: 67
+        height: 101
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4d4e3a3d6908320a0800000000000000
+      internalID: -6907536018172025644
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dash_hurt_dead_10
+      rect:
+        serializedVersion: 2
+        x: 401
+        y: 1023
+        width: 103
+        height: 73
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 96de5d1a9e9d09e20800000000000000
+      internalID: 3355421319856778601
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dash_hurt_dead_11
+      rect:
+        serializedVersion: 2
+        x: 551
+        y: 1023
+        width: 118
+        height: 46
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 826f83d560434f780800000000000000
+      internalID: -8650231782333417944
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dash_hurt_dead_12
+      rect:
+        serializedVersion: 2
+        x: 710
+        y: 1023
+        width: 113
+        height: 52
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5740edcd0c85b4670800000000000000
+      internalID: 8524004305091298421
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dash_hurt_dead_13
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 895
+        width: 67
+        height: 82
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e16f77689a5ed9c00800000000000000
+      internalID: 909135216066950686
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dash_hurt_dead_14
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 895
+        width: 103
+        height: 58
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a4f0990b1420e40b0800000000000000
+      internalID: -5742649993691852982
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dash_hurt_dead_15
+      rect:
+        serializedVersion: 2
+        x: 303
+        y: 895
+        width: 125
+        height: 30
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a64394941e4a8acc0800000000000000
+      internalID: -3699525806380731286
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dash_hurt_dead_16
+      rect:
+        serializedVersion: 2
+        x: 479
+        y: 895
+        width: 102
+        height: 44
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b471486feec258830800000000000000
+      internalID: 4072710842876172107
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dash_hurt_dead_17
+      rect:
+        serializedVersion: 2
+        x: 624
+        y: 895
+        width: 64
+        height: 51
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6e98c6916316e1060800000000000000
+      internalID: 6926080161925073382
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dash_hurt_dead_18
+      rect:
+        serializedVersion: 2
+        x: 731
+        y: 895
+        width: 76
+        height: 59
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ffe2ec9ff3d553cb0800000000000000
+      internalID: -4884895691458072833
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dash_hurt_dead_19
+      rect:
+        serializedVersion: 2
+        x: 851
+        y: 895
+        width: 76
+        height: 62
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3075abb7cd47ef190800000000000000
+      internalID: -7926769803808057597
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 2e48763fcb4ceab4797a15c781526716
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries:
+      - key: SpriteEditor.SliceSettings
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":64.0,"y":64.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":0,"keepEmptyRects":false,"isAlternate":false}'
+    nameFileIdTable:
+      dash_hurt_dead_0: 6645264266374813467
+      dash_hurt_dead_1: 2654594835952772264
+      dash_hurt_dead_10: 3355421319856778601
+      dash_hurt_dead_11: -8650231782333417944
+      dash_hurt_dead_12: 8524004305091298421
+      dash_hurt_dead_13: 909135216066950686
+      dash_hurt_dead_14: -5742649993691852982
+      dash_hurt_dead_15: -3699525806380731286
+      dash_hurt_dead_16: 4072710842876172107
+      dash_hurt_dead_17: 6926080161925073382
+      dash_hurt_dead_18: -4884895691458072833
+      dash_hurt_dead_19: -7926769803808057597
+      dash_hurt_dead_2: 8780565004892237556
+      dash_hurt_dead_3: 8853499207170629639
+      dash_hurt_dead_4: -3142530043998755695
+      dash_hurt_dead_5: -8312960404639621606
+      dash_hurt_dead_6: -5066451165110072918
+      dash_hurt_dead_7: -6690292244543638830
+      dash_hurt_dead_8: -5543554336468572876
+      dash_hurt_dead_9: -6907536018172025644
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

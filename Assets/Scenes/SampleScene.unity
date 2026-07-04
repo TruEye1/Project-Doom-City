@@ -1718,7 +1718,8 @@ GameObject:
   m_Component:
   - component: {fileID: 889901299}
   - component: {fileID: 889901300}
-  m_Layer: 6
+  - component: {fileID: 889901301}
+  m_Layer: 8
   m_Name: Hitbox_Atk3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1786,6 +1787,20 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 2.3892574, y: 1.4674137}
   m_EdgeRadius: 0
+--- !u!114 &889901301
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 889901298}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 987f53f364ab3f24fb3720a17af3898d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AtaqueJugador
+  danoAtaque: 10
+  esGolpeFinal: 1
 --- !u!1 &913202972
 GameObject:
   m_ObjectHideFlags: 0
@@ -2052,7 +2067,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1197720368}
   - component: {fileID: 1197720369}
-  m_Layer: 6
+  - component: {fileID: 1197720370}
+  m_Layer: 8
   m_Name: Hitbox_Atk4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2120,6 +2136,20 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1.5932236, y: 1.625303}
   m_EdgeRadius: 0
+--- !u!114 &1197720370
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1197720367}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 987f53f364ab3f24fb3720a17af3898d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AtaqueJugador
+  danoAtaque: 20
+  esGolpeFinal: 0
 --- !u!1 &1381958839
 GameObject:
   m_ObjectHideFlags: 0
@@ -2390,7 +2420,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1494323788}
   - component: {fileID: 1494323789}
-  m_Layer: 6
+  - component: {fileID: 1494323790}
+  m_Layer: 8
   m_Name: Hitbox_Atk1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2458,6 +2489,20 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 2.0306225, y: 1.5036492}
   m_EdgeRadius: 0
+--- !u!114 &1494323790
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1494323787}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 987f53f364ab3f24fb3720a17af3898d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AtaqueJugador
+  danoAtaque: 10
+  esGolpeFinal: 0
 --- !u!1 &1526662682
 GameObject:
   m_ObjectHideFlags: 0
@@ -2625,7 +2670,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1607234636}
   - component: {fileID: 1607234637}
-  m_Layer: 6
+  - component: {fileID: 1607234638}
+  m_Layer: 8
   m_Name: Hitbox_Atk2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2681,7 +2727,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0.79678774, y: 1.2750382}
+  m_Offset: {x: 0.74672556, y: 1.2750382}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -2691,8 +2737,22 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 1.8963861, y: 1.5189848}
+  m_Size: {x: 1.7962618, y: 1.5189848}
   m_EdgeRadius: 0
+--- !u!114 &1607234638
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1607234635}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 987f53f364ab3f24fb3720a17af3898d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AtaqueJugador
+  danoAtaque: 10
+  esGolpeFinal: 0
 --- !u!1 &1621142475
 GameObject:
   m_ObjectHideFlags: 0
@@ -3297,9 +3357,11 @@ GameObject:
   - component: {fileID: 1992251865}
   - component: {fileID: 1992251864}
   - component: {fileID: 1992251863}
+  - component: {fileID: 1992251867}
+  - component: {fileID: 1992251868}
   m_Layer: 6
   m_Name: PlayerBase
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3358,7 +3420,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1992251862}
-  m_BodyType: 0
+  m_BodyType: 1
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
@@ -3396,10 +3458,10 @@ MonoBehaviour:
   gravity: 15
   comboStep: 0
   comboWindow: 0.8
-  hitboxAtk1: {fileID: 0}
-  hitboxAtk2: {fileID: 0}
-  hitboxAtk3: {fileID: 0}
-  hitboxAtk4: {fileID: 0}
+  hitboxAtk1: {fileID: 1494323787}
+  hitboxAtk2: {fileID: 1607234635}
+  hitboxAtk3: {fileID: 889901298}
+  hitboxAtk4: {fileID: 1197720367}
 --- !u!4 &1992251866
 Transform:
   m_ObjectHideFlags: 0
@@ -3416,6 +3478,65 @@ Transform:
   - {fileID: 553701157}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!61 &1992251867
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1992251862}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0.6459203, y: 0.256539}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Size: {x: 1.9217882, y: 3.3153036}
+  m_EdgeRadius: 0
+--- !u!114 &1992251868
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1992251862}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 60fe2fd058922dd4285ec19190e06805, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SaludJugador
+  vidaMaxima: 100
 --- !u!4 &8052039131628428855 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4713402363782368428, guid: a2623a44705ca3f4fbaf67b80cfd6562, type: 3}
@@ -3429,6 +3550,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 981235530}
     m_Modifications:
+    - target: {fileID: 1482694318295369003, guid: a2623a44705ca3f4fbaf67b80cfd6562, type: 3}
+      propertyPath: danoAtaque
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 4713402363782368428, guid: a2623a44705ca3f4fbaf67b80cfd6562, type: 3}
       propertyPath: m_LocalPosition.x
       value: -7.32
@@ -3469,13 +3594,13 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6791337075091324819, guid: a2623a44705ca3f4fbaf67b80cfd6562, type: 3}
-      propertyPath: velocidadX
-      value: 2.5
+    - target: {fileID: 6483276096936649082, guid: a2623a44705ca3f4fbaf67b80cfd6562, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
-    - target: {fileID: 6791337075091324819, guid: a2623a44705ca3f4fbaf67b80cfd6562, type: 3}
-      propertyPath: distanciaAtaqueX
-      value: 2.2
+    - target: {fileID: 6590273519336567192, guid: a2623a44705ca3f4fbaf67b80cfd6562, type: 3}
+      propertyPath: m_BodyType
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7027165715120518895, guid: a2623a44705ca3f4fbaf67b80cfd6562, type: 3}
       propertyPath: m_Name

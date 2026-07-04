@@ -19,7 +19,7 @@ MonoBehaviour:
     width: 1920
     height: 997
   m_ShowMode: 4
-  m_Title: Project
+  m_Title: Hierarchy
   m_RootView: {fileID: 8}
   m_MinSize: {x: 875, y: 338}
   m_MaxSize: {x: 10000, y: 10000}
@@ -74,7 +74,7 @@ MonoBehaviour:
   m_MinSize: {x: 100, y: 112}
   m_MaxSize: {x: 8096, y: 16192}
   vertical: 1
-  controlID: 89
+  controlID: 85
   draggingID: 0
 --- !u!114 &4
 MonoBehaviour:
@@ -100,7 +100,7 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 168}
   m_MaxSize: {x: 24288, y: 24288}
   vertical: 0
-  controlID: 86
+  controlID: 82
   draggingID: 0
 --- !u!114 &5
 MonoBehaviour:
@@ -276,7 +276,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 168}
   m_MaxSize: {x: 16192, y: 24288}
   vertical: 1
-  controlID: 87
+  controlID: 83
   draggingID: 0
 --- !u!114 &12
 MonoBehaviour:
@@ -302,7 +302,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 112}
   m_MaxSize: {x: 16192, y: 16192}
   vertical: 0
-  controlID: 88
+  controlID: 84
   draggingID: 0
 --- !u!114 &13
 MonoBehaviour:
@@ -391,14 +391,14 @@ MonoBehaviour:
       e31: 0
       e32: 0
       e33: 1
-    - e00: 1.0428572
+    - e00: 1.0406593
       e01: 0
       e02: 0
-      e03: -37.142883
+      e03: -37.03247
       e10: 0
-      e11: 1.0428572
+      e11: 1.0406593
       e12: 0
-      e13: 95.807144
+      e13: 104.065926
       e20: 0
       e21: 0
       e22: 1
@@ -776,7 +776,7 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Sprites/Enemigos/Pandillero_Verde/01_Idle
+    - Assets/Scenes
     m_Globs: []
     m_ProductIds: 
     m_AnyWithAssetOrigin: 0
@@ -786,19 +786,21 @@ MonoBehaviour:
   m_ViewMode: 1
   m_StartGridSize: 16
   m_LastFolders:
-  - Assets/Sprites/Enemigos/Pandillero_Verde/01_Idle
+  - Assets/Scenes
   m_LastFoldersGridSize: 16
   m_LastProjectPath: C:\Users\PC\DoomCity
   m_LockTracker:
     m_IsLocked: 0
   m_LastLocalAssetsSearchArea: 1
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 174}
+    scrollPos: {x: 0, y: 60}
     m_SelectedIDs:
-    - m_Data: 53592
+    - m_Data: 70352
     m_LastClickedID:
-      m_Data: 53592
-    m_ExpandedIDs: []
+      m_Data: 70352
+    m_ExpandedIDs:
+    - m_Data: 0
+    - m_Data: 50786
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -830,7 +832,9 @@ MonoBehaviour:
     m_SelectedIDs: []
     m_LastClickedID:
       m_Data: 0
-    m_ExpandedIDs: []
+    m_ExpandedIDs:
+    - m_Data: 0
+    - m_Data: 50786
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -858,11 +862,10 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
   m_ListAreaState:
-    m_SelectedInstanceIDs:
-    - m_Data: 49690
+    m_SelectedInstanceIDs: []
     m_LastClickedEntityId:
-      m_Data: 49690
-    m_HadKeyboardFocusLastEvent: 0
+      m_Data: 0
+    m_HadKeyboardFocusLastEvent: 1
     m_ExpandedInstanceIDs:
     - m_Data: 82206
     - m_Data: 85340
@@ -999,9 +1002,12 @@ MonoBehaviour:
       m_LastClickedID:
         m_Data: 0
       m_ExpandedIDs:
-      - m_Data: -1380
-      - m_Data: 50264
-      - m_Data: 50364
+      - m_Data: -100648
+      - m_Data: -60062
+      - m_Data: -59050
+      - m_Data: 77134
+      - m_Data: 77172
+      - m_Data: 77272
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 

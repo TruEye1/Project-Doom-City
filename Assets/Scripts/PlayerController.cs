@@ -35,9 +35,7 @@ public class PlayerController : MonoBehaviour
 
     void Awake()
     {
-        // Inicialización de Input System y suscripción de eventos
         controls = new PlayerControls();
-
         controls.Player.Jump.performed += ctx => RealizarSalto();
         controls.Player.Run.performed += ctx => isRunning = true;
         controls.Player.Run.canceled += ctx => isRunning = false;
@@ -50,56 +48,33 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-
-        // Obtener referencias del objeto visual (hijo)
         anim = GetComponentInChildren<Animator>();
-
-        // Auto-asignación de transform visual si no está definido en el Inspector
-        if (spriteTransform == null && anim != null)
-        {
-            spriteTransform = anim.transform;
-        }
+        if (spriteTransform == null && anim != null) spriteTransform = anim.transform;
     }
 
     void Update()
     {
         if (Time.timeScale == 0f) return;
 
-        // Reinicio del temporizador de combo (Input Buffer)
         if (Time.time > lastClickTime + comboWindow && !isAttacking)
         {
             comboStep = 0;
             if (anim != null) anim.SetInteger("ComboStep", 0);
         }
 
-        // Control de movimiento y State Lock
         if (isAttacking || isJumping)
         {
             moveInput = Vector2.zero;
-
-            // Forzar detención de animaciones de movimiento al atacar
-            if (anim != null)
-            {
-                anim.SetFloat("Speed", 0);
-                anim.SetBool("IsRunning", false);
-            }
+            if (anim != null) { anim.SetFloat("Speed", 0); anim.SetBool("IsRunning", false); }
         }
         else
         {
             moveInput = controls.Player.Move.ReadValue<Vector2>();
         }
 
-        // Orientación del Sprite (Flip)
-        if (moveInput.x > 0)
-        {
-            spriteTransform.localScale = new Vector3(1, 1, 1);
-        }
-        else if (moveInput.x < 0)
-        {
-            spriteTransform.localScale = new Vector3(-1, 1, 1);
-        }
+        if (moveInput.x > 0) spriteTransform.localScale = new Vector3(1, 1, 1);
+        else if (moveInput.x < 0) spriteTransform.localScale = new Vector3(-1, 1, 1);
 
-        // Sincronización de variables del Animator
         if (anim != null)
         {
             if (!isJumping && !isAttacking)
@@ -110,94 +85,63 @@ public class PlayerController : MonoBehaviour
             anim.SetBool("IsJumping", isJumping);
         }
 
-        // Simulación de gravedad en eje Z (falso 3D)
         if (isJumping)
         {
             currentJumpVelocity -= gravity * Time.deltaTime;
             spriteTransform.localPosition += new Vector3(0, currentJumpVelocity * Time.deltaTime, 0);
-
-            // Detección de suelo
-            if (spriteTransform.localPosition.y <= 0)
-            {
-                spriteTransform.localPosition = Vector3.zero;
-                isJumping = false;
-                currentJumpVelocity = 0;
-            }
+            if (spriteTransform.localPosition.y <= 0) { spriteTransform.localPosition = Vector3.zero; isJumping = false; currentJumpVelocity = 0; }
         }
     }
 
     void FixedUpdate()
     {
-        // Bloqueo físico durante el estado de ataque
         if (isAttacking) return;
-
         float currentSpeed = isRunning ? runSpeed : speed;
         rb.MovePosition(rb.position + moveInput.normalized * currentSpeed * Time.fixedDeltaTime);
     }
 
     private void RealizarSalto()
     {
-        // Bloqueo de evento temporal: Ignorar el input si el juego está en pausa
         if (Time.timeScale == 0f) return;
-
-        if (!isJumping && !isAttacking)
-        {
-            isJumping = true;
-            currentJumpVelocity = jumpPower;
-        }
+        if (!isJumping && !isAttacking) { isJumping = true; currentJumpVelocity = jumpPower; }
     }
-
-    // --- LÓGICA DE COMBATE ---
 
     private void IntentarAtacar()
     {
-        // Bloqueo de evento temporal: Ignorar el input si el juego está en pausa
         if (Time.timeScale == 0f) return;
-
-        // Validación de estado para iniciar secuencia de ataque
-        if (!isJumping && !isAttacking)
-        {
-            StartCoroutine(EjecutarAtaque());
-        }
+        if (!isJumping && !isAttacking) StartCoroutine(EjecutarAtaque());
     }
 
     private IEnumerator EjecutarAtaque()
     {
         isAttacking = true;
         comboStep++;
-
-        // Ciclar el combo al superar el último golpe (Finisher)
         if (comboStep > 4) comboStep = 1;
-
         lastClickTime = Time.time;
 
-        if (anim != null)
-        {
-            anim.SetInteger("ComboStep", comboStep);
-            anim.SetTrigger("Attack");
-        }
+        if (anim != null) { anim.SetInteger("ComboStep", comboStep); anim.SetTrigger("Attack"); }
 
-        // Duración del State Lock ajustada para animaciones a velocidad 0.8x
-        // Valores originales (1.0x): 0.6f y 0.35f -> Nuevos (0.8x): 0.75f y 0.45f
         float pauseTime = (comboStep == 4) ? 0.75f : 0.45f;
-
         yield return new WaitForSeconds(pauseTime);
-
-        // Fin de la secuencia de ataque, restaurar control
         isAttacking = false;
     }
 
-    // --- ANIMATION EVENTS ---
+    // --- LOGICA DE HITBOXES CON GOLPE FINAL ---
 
     public void AbrirHitbox(int id)
     {
-        // Limpiar estado de hitboxes para evitar colisiones superpuestas
         CerrarHitboxes();
 
         if (id == 1 && hitboxAtk1 != null) hitboxAtk1.SetActive(true);
         if (id == 2 && hitboxAtk2 != null) hitboxAtk2.SetActive(true);
         if (id == 3 && hitboxAtk3 != null) hitboxAtk3.SetActive(true);
-        if (id == 4 && hitboxAtk4 != null) hitboxAtk4.SetActive(true);
+
+        if (id == 4 && hitboxAtk4 != null)
+        {
+            AtaqueJugador scriptAtk = hitboxAtk4.GetComponent<AtaqueJugador>();
+            if (scriptAtk != null) scriptAtk.esGolpeFinal = true;
+            hitboxAtk4.SetActive(true);
+        }
     }
 
     public void CerrarHitboxes()
@@ -205,6 +149,12 @@ public class PlayerController : MonoBehaviour
         if (hitboxAtk1 != null) hitboxAtk1.SetActive(false);
         if (hitboxAtk2 != null) hitboxAtk2.SetActive(false);
         if (hitboxAtk3 != null) hitboxAtk3.SetActive(false);
-        if (hitboxAtk4 != null) hitboxAtk4.SetActive(false);
+
+        if (hitboxAtk4 != null)
+        {
+            AtaqueJugador scriptAtk = hitboxAtk4.GetComponent<AtaqueJugador>();
+            if (scriptAtk != null) scriptAtk.esGolpeFinal = false;
+            hitboxAtk4.SetActive(false);
+        }
     }
 }
